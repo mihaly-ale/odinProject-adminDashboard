@@ -1,0 +1,412 @@
+@use 'sass:map';
+@use '../../../../node_modules/utopia-core-scss/src/utopia.scss' as utopia;
+@use '../abstracts/' as *;
+
+/* TEMPLATE START*/
+
+//--- BASE
+//# _fontface.scss
+@include font-face('Kanit', 'kanit-regular', 400, normal, (true, sans));
+@include font-face('Kanit', 'kanit-semibold', 600, normal, (false, sans));
+@include font-face('Kanit', 'kanit-extralight', 200, normal, (false, sans));
+@include font-face('DMSerif', 'dmserif-regular', 400, normal, (true, serif));
+@include font-face('DMSerif', 'dmserif-italic', 400, italic, (false, serif));
+
+//# _root.scss
+//! ALL mixins use maps from `tokens.scss` or `overrides.scss` to generate custom properties
+//* fonts */
+:root {
+	@include utopia.generateTypeScale($utopia-config);
+}
+:root {
+	@include create-prop-from-map($font-families, 'ff', '-');
+}
+:root {
+	@include create-prop-from-map($font-weight-aliases);
+}
+
+//* lengths */
+:root {
+	@include create-prop-from-map($widths);
+}
+:root {
+	@include create-prop-from-map($sizes, 'size', '-');
+}
+:root {
+	@include create-prop-from-map($offsets);
+}
+
+//* colors */
+:root {
+	@include create-base-colors;
+}
+:root {
+	@include create-shades(gray);
+}
+:root {
+	@include create-shades($colors);
+}
+
+//* box-shadow */
+:root {
+	@include create-prop-from-map($shadows, 'shadow', '-');
+	@include create-shadow-color($primary-dark, $alpha: -25%);
+}
+
+//# _utils.scss
+.center-text {
+	text-align: center;
+}
+
+.visually-hidden:not(:focus):not(:active) {
+	clip-path: inset(50%);
+	height: 1px;
+	overflow: hidden;
+	position: absolute;
+	white-space: nowrap;
+	width: 1px;
+}
+
+.flex-center {
+	@extend %flex-center;
+}
+
+//# _typography.scss
+body {
+	font-family: var(--ff-sans, $system-ui);
+	font-weight: var(--fw-normal);
+}
+
+:where(h1, h2, h3, h4, h5, h6) {
+	font-family: var(--ff-serif);
+}
+
+h1,
+.h1 {
+	font-size: var(--fs-5);
+}
+
+h2,
+.h2 {
+	font-size: var(--fs-4);
+}
+
+h3,
+.h3 {
+	font-size: var(--fs-3);
+}
+
+h4,
+.h4 {
+	font-size: var(--fs-2);
+}
+
+.large {
+	font-size: var(--fs-1);
+}
+
+body {
+	font-size: var(--fs-0);
+}
+
+small {
+	font-size: var(--fs--1);
+}
+
+p {
+	font-weight: var(--fw-slim);
+}
+
+//# _general.scss
+body {
+	--body-bg-clr: var(--clr-light);
+	--body-text-clr: var(--clr-dark);
+	background-color: var(--body-bg-clr, (var(--clr-light, #{$clr-white})));
+	color: var(--body-text-clr, (var(--clr-dark, #{$clr-black})));
+}
+
+#app {
+	overflow: hidden;
+}
+
+img::after {
+	content: 'Sorry, the image could not be loaded.';
+	display: block;
+	margin-block: 1ex;
+	font-size: var(--fs-0);
+}
+
+.logo:hover {
+	--logo-hover-color-1: var(--body-bg-clr, var(--clr-light, #{$clr-white}));
+	--logo-hover-color-2: var(--body-text-clr, var(--clr-dark, #{$clr-black}));
+
+	--logo-hover-color-1-ratio: 60%;
+	--logo-hover-color-2-ratio: 40%;
+
+	--logo-hover-shadow-color: color-mix(
+		in hsl,
+		var(--logo-hover-color-1) var(--logo-hover-color-1-ratio),
+		var(--logo-hover-color-2) var(--logo-hover-color-2-ratio)
+	);
+
+	filter: drop-shadow(0 0 2em var(--logo-hover-shadow-color));
+}
+
+.btn-light-wrapper {
+	@include flex-center($dir: row);
+
+	width: 100%;
+	background-color: var(--clr-dark);
+	padding: var(--size-10);
+}
+
+.button-container {
+	width: 100%;
+}
+
+//--- LAYOUTS
+//# _grid.scss
+.content {
+	display: grid;
+	grid-template-columns:
+		1fr
+		min(var(--content-width, $default-content-width), 100%)
+		1fr;
+
+	& > * {
+		grid-column: 2;
+	}
+}
+
+.full-bleed {
+	width: 100%;
+	grid-column: 1 / 4;
+}
+
+//--- COMPONENTS
+//# _buttons.scss
+.btn {
+	@extend %button;
+
+	--btn-bg-clr: #{$clr-black-3};
+}
+
+.btn-dark {
+	@extend %button;
+
+	--btn-bg-clr: var(--clr-dark);
+	--btn-text-clr: var(--clr-light);
+}
+
+.btn-light {
+	@extend %button;
+
+	--btn-bg-clr: var(--clr-light);
+	--btn-text-clr: var(--clr-dark);
+}
+
+.btn-ghost-light {
+	@extend %button;
+
+	--btn-padding: #{$btn-padding-with-border};
+
+	--btn-bg-clr: transparent;
+	--btn-text-clr: var(--clr-dark);
+
+	--btn-border-width: 4px;
+	--btn-border-clr: var(--clr-dark);
+
+	--btn-focus-outline-clr: var(--btn-text-clr, #{$clr-white});
+
+	--btn-hover-filter-value: none;
+
+	&:hover {
+		--btn-text-clr: var(--clr-light);
+		--btn-bg-clr: var(--clr-dark);
+	}
+}
+
+.btn-ghost-dark {
+	@extend %button;
+
+	--btn-padding: #{$btn-padding-with-border};
+
+	--btn-bg-clr: transparent;
+	--btn-text-clr: var(--clr-light);
+
+	--btn-border-width: 4px;
+	--btn-border-clr: var(--clr-light);
+
+	--btn-focus-outline-clr: var(--btn-text-clr, #{$clr-white});
+
+	--btn-hover-filter-value: none;
+
+	&:hover {
+		--btn-text-clr: var(--clr-dark);
+		--btn-bg-clr: var(--clr-light);
+	}
+}
+
+.icon {
+	@extend %icon;
+}
+
+.icon-mask {
+	@extend %icon;
+
+	background-color: var(--icon-btn-clr, currentColor);
+	mask-image: url('/send.svg');
+	mask-position: left;
+	mask-repeat: no-repeat;
+	mask-size: cover;
+}
+
+//# _card.scss
+.cards {
+	display: grid;
+	grid-template-columns: repeat(
+		auto-fit,
+		minmax(min(var(--par-min-width), 100%), 1fr)
+	);
+	grid-template-rows: auto;
+	gap: $cards-gap;
+
+	padding-block: $section-padding;
+	padding-inline: var(--size-6);
+}
+
+.card {
+	padding-block: clamp(var(--size-6), 5vw, var(--size-10));
+	padding-inline: max(var(--size-8), 10%);
+}
+
+.card:nth-child(1) {
+	@include create-shadow-color(turquoise, $recompute-shadow-key: small);
+	box-shadow: var(--shadow-small);
+}
+
+.card:nth-child(2) {
+	@include create-shadow-color(red, $recompute-shadow-key: medium);
+	box-shadow: var(--shadow-medium);
+}
+
+.card:nth-child(3) {
+	@include create-shadow-color(green, $recompute-shadow-key: large);
+	box-shadow: var(--shadow-large);
+}
+
+//# _link.scss
+a {
+	--_bg-clr: var(--body-bg-clr, var(--clr-light, #{$clr-white}));
+	--_text-clr: var(--body-text-clr, var(--clr-dark, #{$clr-black}));
+
+	--link-visited-text-clr: color-mix(
+		in oklab,
+		var(--_bg-clr) 20%,
+		var(--_text-clr) 80%
+	);
+
+	--link-hover-bg-clr: color-mix(
+		in oklab,
+		var(--_bg-clr) 80%,
+		var(--_text-clr) 20%
+	);
+
+	--link-active-bg-clr: color-mix(
+		in oklab,
+		var(--_bg-clr) 30%,
+		var(--_text-clr) 70%
+	);
+}
+
+a:visited {
+	color: var(--link-visited-text-clr);
+}
+
+a:not(:has(svg, img)):hover {
+	background-color: var(--link-hover-bg-clr);
+}
+
+a:focus-visible {
+	outline-width: var(--link-outline-width, 2px);
+	outline-style: solid;
+	outline-offset: var(--link-outline-offset, 2px);
+	outline-color: var(--body-text-clr, var(--clr-dark, #{$clr-black}));
+
+	text-decoration-color: transparent;
+}
+
+a:active {
+	color: var(--body-bg-clr) !important;
+	background-color: var(--body-text-clr) !important;
+}
+
+//--- LAYOUT
+//# _header.scss
+header {
+	background-color: #{$clr-black};
+	background-image: linear-gradient(62deg, $clr-red, $clr-blue);
+	background-repeat: no-repeat;
+	background-size: cover;
+	color: var(--clr-light);
+
+	gap: var(--size-8) !important;
+
+	--section-max-padding: var(--size-17);
+	padding-block: $section-padding;
+
+	@include mq(1600px) {
+		--section-max-padding: var(--size-19);
+	}
+
+	& p {
+		font-weight: var(--fw-normal);
+	}
+}
+
+.container-header-logo {
+	@include flex-center($dir: row, $gap: var(--size-10));
+}
+
+//# _footer.scss
+footer {
+	grid-template-columns: subgrid;
+
+	display: grid;
+	gap: var(--size-12);
+
+	--section-max-padding: var(--size-17);
+	padding-block-start: $section-padding;
+
+	.button-container {
+		grid-column: 1 / 4;
+		padding-block-end: var(--size-6);
+	}
+
+	.social-icons {
+		grid-column: 2 / 3;
+		@include flex-center($dir: row);
+
+		& > a {
+			transition: 150ms;
+
+			&:hover {
+				scale: 1.1;
+			}
+		}
+	}
+
+	p:has(.dev-logo) {
+		grid-column: 1 / 4;
+		max-inline-size: 100%;
+		text-align: center;
+		padding-block: var(--size-6);
+		background-color: var(--clr-blue-10);
+	}
+
+	.dev-logo {
+		display: inline-block;
+	}
+}
+
+/* TEMPLATE END*/

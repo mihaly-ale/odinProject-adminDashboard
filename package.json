@@ -1,0 +1,36 @@
+{
+	"name": "vite-sass-template",
+	"version": "1.0.0",
+	"description": "Simple starter template with Sass mixins,placeholders and variables using Vite as a bundler tool.",
+	"main": "main.js",
+	"scripts": {
+		"dev": "vite",
+		"build": "vite build",
+		"preview": "vite preview",
+		"debug:sass": "sass --watch src/styles/scss/main.scss:src/styles/css/main.css",
+		"eslint": "eslint --fix"
+	},
+	"keywords": [
+		"vite",
+		"sass",
+		"scss",
+		"template",
+		"beginner"
+	],
+	"author": "Mihaly Ale",
+	"license": "MIT",
+	"devDependencies": {
+		"@eslint/js": "^9.31.0",
+		"@fullhuman/postcss-purgecss": "^7.0.2",
+		"eslint": "^9.31.0",
+		"eslint-config-prettier": "^10.1.8",
+		"eslint-plugin-prettier": "^5.5.3",
+		"globals": "^16.3.0",
+		"prettier": "3.6.2",
+		"sass": "^1.89.0",
+		"vite": "^6.3.4"
+	},
+	"dependencies": {
+		"utopia-core-scss": "^1.2.1"
+	}
+}

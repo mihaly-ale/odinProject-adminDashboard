@@ -1,0 +1,449 @@
+@use 'sass:map';
+@use 'sass:math';
+@use 'sass:color';
+@use 'sass:string';
+@use 'sass:list';
+@use 'sass:meta';
+
+@use './variables' as *;
+@use './tokens' as *;
+@use './breakpoints' as *;
+@use './functions' as *;
+
+//# Center content with flexbox
+/// Center content with flexbox
+///
+/// Justify-content and align-items are defaulting to center.
+///
+/// @group utilities
+///
+/// @param {String} $dir [column] - Flex direction. If set to `row` adds `flex-warp: wrap`.
+/// @param {Number} $gap [$size-6] - Gap. Uses `$size-6` as the default gap.
+///
+@mixin flex-center($dir: column, $gap: null) {
+	@debug $gap;
+
+	@if $gap == null {
+		@if meta.global-variable-exists('size-6') {
+			$gap: $size-6;
+		} @else {
+			@warn "⚠️ Variable '$size-6' is not defined. Using 0 for gap.";
+		}
+	}
+
+	display: flex;
+	flex-direction: $dir;
+	justify-content: center;
+	align-items: center;
+	gap: $gap;
+
+	@if ($dir == row) {
+		flex-wrap: wrap;
+	}
+}
+
+//# Create pseudo-element
+/// Create pseudo-element
+///
+/// @group utilities
+///
+/// @param {String} $element - Must be `before` or `after`
+/// @param {String} $display [inline-block] - display
+/// @param {String} $pos [null] - position
+/// @param {String} $content [''] - content
+///
+@mixin pseudo($element, $display: inline-block, $pos: null, $content: '') {
+	position: relative;
+
+	@if not($element == before or $element == after) {
+		@error "Property #{$element} is incorrect. Must be either before or after.";
+	}
+	&::#{$element} {
+		display: $display;
+		position: $pos;
+		content: $content;
+	}
+}
+
+//# Default icon styles
+/// Apply default styles to icons
+///
+/// Sets `color` to `currentColor`, `block-size` to `1lh`, and enforces a square aspect ratio.
+///
+/// @group utilities
+///
+@mixin icon-defaults() {
+	color: currentColor;
+	block-size: 1lh;
+	aspect-ratio: 1;
+}
+
+//# Create custom properties
+/// Create CSS custom properties from a map
+///
+/// **Note:** For color-related properties, prefer using mixins from the [color mixins](#colors).
+///
+/// @group helpers
+///
+/// @param {Map} $map - source map
+/// @param {String | Null} $prefix [null] - optional prefix for custom properties
+/// @param {String | NUll} $divider [null] - optional divider between prefix and key
+///
+/// @example CSS Without prefix and divider:
+/// :root {create-prop-from-map($widths)}
+///
+/// :root {
+/// 	--min-width: 300px;
+/// 	--sidebar-width: 300px;
+/// 	--content-width: 1400px;
+/// 	...
+/// }
+///
+/// @example CSS With prefix and divider:
+/// :root {create-prop-from-map($sizes)}
+///
+/// :root {
+/// 	--size-1: 0.0625em;
+/// 	--size-2: 0.125em;
+/// 	--size-3: 0.25em;
+/// 	...
+///	}
+///
+@mixin create-prop-from-map($map, $prefix: null, $divider: null) {
+	@each $prop, $value in $map {
+		--#{$prefix}#{$divider}#{$prop}: #{$value};
+	}
+}
+
+//# Create color custom properties
+/// Create CSS custom properties from the `$colors` map
+///
+/// This is a wrapper for @mixin `create-prop-from-map`.
+///
+/// **Note:** Extend `$colors` map with `@function safe-map-merge`
+///
+/// @group colors
+///
+/// @see $colors
+/// @see $safe-map-merge
+/// @see $create-prop-from-map
+///
+@mixin create-base-colors {
+	@include create-prop-from-map($colors, 'clr', '-');
+}
+
+//# Create color shades
+/// Create color shades from a single color or a map of colors
+///
+/// @group colors
+///
+/// @param {Map|Color} $input
+///
+/// @see $colors
+///
+/// @example scss
+/// :root {
+///		@include create-shades(gray)
+/// }
+///
+/// :root {
+/// 	...
+/// 	--clr-gray-10: hsl(0deg 0% 90%);
+///		--clr-gray-20: hsl(0deg 0% 80%);
+///	...
+/// }
+/// @example scss
+/// :root {
+///		@include create-shades($colors)
+/// }
+///
+/// :root {
+/// 	...
+///  --clr-green-10: hsl(120deg 100% 90%);
+///  --clr-green-20: hsl(120deg 100% 80%);
+///		...
+///  --clr-red-10: hsl(6deg 93% 90%);
+///  --clr-red-20: hsl(6deg 93% 80%);
+///		...
+/// }
+@mixin create-shades($input) {
+	@if meta.type-of($input) == 'map' {
+		@each $map-key, $map-value in $input {
+			@include _generate-shades($key: $map-key, $value: $map-value);
+		}
+	} @else {
+		@include _generate-shades($value: $input);
+	}
+}
+
+//# Internal mixin for `@mixin create-shades`
+/// Resolves passed argument in `@mixin create-shades`.
+///
+/// @group colors
+///
+/// @access private
+///
+/// @param {String|null} $key [null] - Used as a base name in the custom property.
+///
+/// Defaults to `null` if `@mixin create-shades` is passed a singe color.
+///
+/// Otherwise uses key of the input map.
+///
+/// @param {Color} $value - the base color from which to generate shades
+///
+@mixin _generate-shades($key: null, $value) {
+	$resolved-key: if($key != null, $key, $value);
+
+	$hsl: color.to-space($value, hsl);
+	$h: round-to((color.channel($hsl, 'hue')), 0);
+	$s: round-to((color.channel($hsl, 'saturation')), 0);
+
+	@for $i from 1 through 9 {
+		--clr-#{"" + $resolved-key}-#{$i * 10}: hsl(#{$h} #{$s} #{(10 - $i) * 10%});
+	}
+}
+
+//# Create --shadow-color CSS custom property
+/// Create `--shadow-color` CSS custom property with optional override
+///
+/// **Note:** Refer to the `$shadows` map for how to use this mixin.
+///
+/// @group shadows
+///
+/// @see $shadows
+///
+/// @param {Color} $value - base color to compute the custom property
+/// @param {Number} $alpha [-75%] - alpha adjustment
+/// @param {String|null} $recompute-shadow-key [null] - Optional key from the `$shadows` map.
+///
+/// If set, the corresponding shadow will be regenerated using the current, locally scoped `--shadow-color`.
+///
+/// Use this when a component defines a custom `--shadow-color` and needs its shadow to reflect that change.
+///
+@mixin create-shadow-color($color, $alpha: -75%, $recompute-shadow-key: null) {
+	$hsl-color: color.to-space($color, hsl);
+	$hsl-alpha: color.scale($hsl-color, $alpha: $alpha);
+
+	--shadow-color: #{$hsl-alpha};
+
+	@if $recompute-shadow-key != null {
+		$new-shadow: map.get($shadows, $recompute-shadow-key);
+		--shadow-#{$recompute-shadow-key}: #{$new-shadow};
+	}
+}
+
+//# Create font-face rules and register font
+/// Create `font-face` with automatic font registration in the `$font-families` via `@mixin _update-font-families-map`
+///
+/// **Note:** See `@mixin _update-font-families-map` how the `$update-preferences` parameter is destructured.
+///
+/// **IMPORTANT:** This mixin handles `@font-face` rules and font registration, but to generate CSS custom properties, use the `create-prop-from-map` mixin.
+///
+/// @group fonts
+///
+/// @see {mixin} _update-font-families-map
+/// @see $font-families
+/// @see create-prop-from-map
+///
+/// @param {String} $typeface - font-family
+/// @param {String} $font-file - file name
+/// @param {Number} $weight - font-weight
+/// @param {String} $style - font-style
+/// @param {List} $update-preferences [(true, null)] - font registration tuple
+/// @param {String} $font-display [swap] - font-display
+/// @param {String} $url ['/fonts/'] - path to font files folder
+///
+/// @example scss **Pass first typeface with (true, sans)**
+///  @include font-face('Lato', 'lato-regular', 400, normal, (true, sans));
+///
+///  @font-face {
+///  font-family: "lato";
+/// 	src: local("Lato"), url("/fonts/lato-regular.woff2") format ("woff2");
+/// 	font-weight: 400;
+/// 	font-style: normal
+/// 	font-display: swap;
+/// }
+///
+/// /* This also updates the 'sans' key of the $font-families map. */
+///
+/// @example scss **Pass second typeface with (false, sans)**
+///  @include font-face('Lato', 'lato-bolditalic', 700, italic, (false, sans));
+///
+///  @font-face {
+/// 	font-family: "Lato";
+/// 	src: local("Lato"), url("/fonts/lato-bolditalic.woff2") format ("woff2");
+/// 	font-weight: 700;
+/// 	font-style: italic;
+/// 	font-display: swap;
+/// }
+///
+/// /* False value prevents registering the same font. */
+///
+@mixin font-face(
+	$typeface,
+	$font-file,
+	$weight,
+	$style,
+	$update-preferences: (true, null),
+	$font-display: swap,
+	$url: '/fonts/'
+) {
+	@font-face {
+		font-family: $typeface;
+		src: local($typeface), url('#{$url}#{$font-file}.woff2') format('woff2');
+		font-weight: $weight;
+		font-style: $style;
+		font-display: $font-display;
+	}
+
+	@include _update-font-families-map($typeface, $update-preferences);
+}
+
+//# Internal mixin to update `$font-families` map
+/// Update font-families map
+///
+/// @group fonts
+///
+/// @access private
+///
+/// @see $font-families
+/// @see {mixin} _set-font-families-map-key
+///
+/// @param {String} $typeface - font-family
+/// @param {List} $update-preferences - font update instructions
+///
+/// `$register-font` must be true to record font as a map value.
+///
+/// Only use when adding typeface the first time, any subsequent addition is superfluous, as the font is already registered in the `$font-families` map.
+///
+/// $register-font-as is a generic font family ('sans', 'monospace', etc)
+///
+@mixin _update-font-families-map($typeface, $update-preferences) {
+	$register-font: list.nth($update-preferences, 1);
+	$register-font-as: list.nth($update-preferences, 2);
+
+	@if ($register-font == true) {
+		$current-map-value: map.get($font-families, '#{$register-font-as}');
+		$new-map-value: $typeface;
+
+		@if ($current-map-value != $new-map-value) {
+			@include _set-font-families-map-key(#{$register-font-as}, $typeface);
+			@debug '"#{$register-font-as}: #{$typeface}" was added to $font-families map.';
+		} @else {
+			@error '$font-families map already contains #{$typeface}.';
+		}
+	} @else if ($register-font == false) {
+		@debug 'Successfully added new "#{$typeface}" style.';
+	} @else if($register-font == extend) {
+		@include _set-font-families-map-key(
+			'#{$register-font-as}-secondary',
+			$typeface
+		);
+		@debug '"#{$register-font-as}-secondary: #{$typeface}" was added to $font-families map.';
+	} @else {
+		@error 'Invalid argument: "#{$register-font}".';
+	}
+}
+
+//# Internal mixin to update `$font-families` map key
+/// Update font-families map key
+///
+/// @group fonts
+///
+/// @access private
+///
+/// @see $font-families
+///
+/// @param {String} $key - $font-families map key
+/// @param {String} $value - font value
+///
+@mixin _set-font-families-map-key($key, $value) {
+	$font-families: map.set($font-families, $key, $value) !global;
+}
+
+//*! DEPRECATED
+//# Create fluid typography
+/// Create fluid typography
+///
+/// Create font-size custom properties
+///
+/// @group fonts
+///
+/// @deprecated Use Utopia
+///
+/// @see $utopia-config
+/// @link https://utopia.fyi/ Utopia
+///
+/// @param {String} $type-scale - scale key from `$type-scales` map
+/// @param {String} $platform [null] - optional namespace suffix
+/// @param {Number} $depth [7] - depth of font levels to create
+///
+@mixin create-type-scale($type-scale, $platform: null, $depth: 7) {
+	$scale: map.get($type-scales, $type-scale);
+	$base-rem: 1rem;
+
+	@if $platform == lg {
+		$base-rem: 1.25rem;
+	}
+
+	:root {
+		@for $i from 1 through $depth {
+			@if $i == 1 {
+				$rem-value: math.div($i, $scale);
+				--fs-#{$i * 50}-#{$platform}: #{round-to($rem-value)}rem;
+			} @else if ($i == 2) {
+				$rem-value: $base-rem;
+				--fs-#{($i - 1) * 100}-#{$platform}: #{$rem-value};
+			} @else if ($i == 3) {
+				$rem-value: $scale;
+				--fs-#{($i - 1) * 100}-#{$platform}: #{round-to($rem-value)}rem;
+			} @else {
+				$rem-value: math.pow($scale, $i - 2);
+				--fs-#{($i - 1) * 100}-#{$platform}: #{round-to($rem-value)}rem;
+			}
+		}
+	}
+}
+
+//# Create media queries
+/// Create media queries with min-width
+///
+/// @group Media-queries
+///
+///
+/// @see $breakpoints
+///
+/// @param {String|Number} $size - Breakpoint name from `$breakpoints` map or px value
+///
+/// @example scss
+/// header {
+/// 	@include mq(1600px) {
+///   		color: $clr-white;
+///		}
+/// }
+///
+/// @example css
+///  @media screen and (min-width: 100em) {
+///  	header {
+///   		 color: $clr-white;
+///  	}
+/// }
+///
+@mixin mq($size) {
+	@if map.has-key($breakpoints, $size) {
+		$breakpoint: map.get($breakpoints, $size);
+		@media screen and (min-width: $breakpoint) {
+			@content;
+		}
+	} @else if(meta.type-of($size) == string) {
+		@error 'Invalid parameter: expected key from `$breakpoint` map or a pixel value.';
+	} @else if (math.unit($size) != 'px') {
+		@error 'Invalid unit: only pixel values are accepted for custom sizes.';
+	} @else {
+		$size-in-em: math.div($size, 16px);
+		@media screen and (min-width: #{$size-in-em}em) {
+			@content;
+		}
+	}
+}
+

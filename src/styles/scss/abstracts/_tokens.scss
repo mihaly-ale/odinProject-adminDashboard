@@ -1,0 +1,313 @@
+@use 'sass:map';
+@use 'sass:color';
+
+//! **Note**: Update maps  in `overrides.scss`
+
+//# Font Scale Ratios
+/// Map with font-scale ratios
+///
+/// @group maps
+///
+/// @type Map <String, Number>
+///
+/// @see $utopia-config
+///
+/// @link https://app.uxcel.com/tutorials/responsive-type-scales-part-1-652 Responsive Type Scales - Uxcel (Ozan Öztaskiran)
+///
+$type-scales: (
+	'minor-second': 1.067,
+	'major-second': 1.125,
+	'minor-third': 1.2,
+	'major-third': 1.25,
+	'perfect-fourth': 1.333,
+	'augmented-fourth': 1.414,
+	'perfect-fifth': 1.5,
+	'golden-ratio': 1.618,
+);
+
+//# System Stack Font Family
+/// System-ui font stack
+///
+/// @group maps
+///
+/// @type List <String>
+///
+/// @link https://css-tricks.com/snippets/css/system-font-stack/#comment-1609511 CSS-Tricks - System Font Stack
+///
+$system-ui: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif,
+	'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+
+//# Font Weights
+/// **Note:** The `$font-weight-aliases` map references only three values from this set.
+///
+/// These are sufficient for the current linked fonts (e.g., Kanit, DM Serif), but the weights can be customized if necessary.
+///
+/// @group maps
+///
+/// @see $font-weight-aliases
+///
+/// @type Map <String, Number>
+///
+/// @see $font-weight-aliases
+///
+$font-weights: (
+	'100': 100,
+	'200': 200,
+	'300': 300,
+	'400': 400,
+	'500': 500,
+	'600': 600,
+	'700': 700,
+	'800': 800,
+	'900': 900,
+);
+
+//# Font weight aliases
+/// Named font weights
+///
+/// @group maps
+///
+/// @see $font-weights
+///
+/// @type Map <String, Number>
+///
+/// @example scss
+/// :root {
+/// 	@include create-prop-from-map($font-weights);
+/// }
+///
+/// :root {
+/// 	--fw-slim: 300;
+/// 	--fw-normal: 500;
+///		--fw-thick: 700;
+/// }
+///
+$font-weight-aliases: (
+	'fw-slim': map.get($font-weights, '300'),
+	'fw-normal': map.get($font-weights, '500'),
+	'fw-thick': map.get($font-weights, '700'),
+);
+
+//# Default font families map
+/// **Note:** The `@mixin font-face` uses `$update-preferences` to optionally register custom keys and/or values in the map.
+///
+/// **IMPORTANT:** This map is used to generate CSS custom properties (as below).
+///
+/// To create font-face rules and register loaded fonts use `@mixin font-face` with correctly set `$update-preferences`.
+///
+/// @group maps
+///
+/// @see font-face
+/// @see create-prop-from-map
+///
+/// @type Map <String, String>
+///
+/// @example scss
+/// /* This must be present */
+/// :root {
+/// 	@include create-prop-from-map($font-families, 'ff,);
+/// }
+/// :root {
+/// 	--ff-sans: sans-serif;
+/// 	--ff-serif: serif;
+/// }
+///
+/// @example scss
+/// /* For this to work */
+/// :root {
+/// 	@include font-face('Kanit', 'kanit-regular', 400, normal, (true, sans));
+/// }
+/// :root {
+/// 	--ff-sans: Kanit;
+///  	--ff-serif: serif
+/// }
+/// @see {mixin} font-face
+///
+$font-families: (
+	'sans': sans-serif,
+	'serif': serif,
+);
+
+//# Spacing Scale
+/// Spacing values in `em` units
+///
+/// Used for margin, padding, gap, etc.
+///
+/// @group maps
+///
+/// @type Map <Number, Length>
+///
+/// @see {mixin} create-prop-from-map
+///
+/// @example scss
+/// :root {
+///		@include create-prop-from-map($sizes, 'size', '-');
+/// }
+/// @example css
+/// :root {
+/// 	--size-1: 0.0625em;
+/// 	--size-2: 0.125em;
+/// 	--size-3: 0.25em;
+/// 	...
+/// }
+///
+$sizes: (
+	'1': 0.0625em,
+	'2': 0.125em,
+	'3': 0.25em,
+	'4': 0.5em,
+	'5': 0.75em,
+	'6': 1em,
+	'7': 1.25em,
+	'8': 1.5em,
+	'9': 1.75em,
+	'10': 2em,
+	'11': 2.5em,
+	'12': 3em,
+	'13': 4em,
+	'14': 5em,
+	'15': 6em,
+	'16': 8em,
+	'17': 10em,
+	'18': 12em,
+	'19': 14em,
+);
+
+//#  Layout Widths
+/// Width values to constrain element sizes
+///
+/// Used for defining layout dimensions.
+///
+/// @group maps
+///
+/// @type Map <Number, Length>
+///
+/// @see {mixin} create-prop-from-map
+///
+/// @example scss
+/// :root {
+///		@include create-prop-from-map($widths);
+/// }
+/// @example css
+/// :root {
+/// 	--min-width: 300px;
+/// 	--content-width: 1400px;
+/// 	...
+/// }
+///
+$widths: (
+	'min-width': 300px,
+	'content-width': 1400px,
+	'sidebar-width': 300px,
+	'par-min-width': 25ch,
+	'par-max-width': 65ch,
+);
+
+//# Offsets
+/// Various offsets
+///
+/// @group maps
+///
+/// @type Map <String, Number>
+///
+/// @see {mixin} create-prop-from-map
+///
+/// @example scss
+/// :root {
+///		@include create-prop-from-map($offsets);
+/// }
+/// @example css
+/// :root {
+/// 	--punctuation-offset: -0.3em;
+/// 	--scroll-top-offset: 3ex;
+/// }
+///
+$offsets: (
+	'punctuation-offset': -0.3em,
+	'scroll-top-offset': 3ex,
+);
+
+//# Color maps
+/// Grayscale colors map
+///
+/// @group maps
+///
+/// @type Map <String, String>
+///
+/// @todo Create shades as in _variables.scss
+///
+$gray-scale: (
+	'black-100': black,
+	'white-100': #fff,
+	'gray': gray,
+);
+
+/// Base colors map
+///
+/// @group maps
+///
+/// @type Map <String, String>
+///
+/// @example scss
+/// :root {
+///		@include create-base-colors;
+/// }
+/// @example css
+/// :root {
+/// 	--clr-green: green;
+/// 	--clr-red: red;
+/// }
+///
+$colors: (
+	'green': green,
+	'red': red,
+	'blue': blue,
+);
+
+//# Shadows
+/// Various box-shadow declarations
+///
+/// @group maps
+///
+/// @type Map <String, String>
+///
+/// @example scss -  **create custom properties and/or set `--shadow-color`**
+/// :root {
+///		@include create-prop-from-map($shadows, 'shadow', '-');
+///
+///  /* optionally create `--shadow-color` on root level. See $shadows map for fallback color. */
+/// 	@include create-shadow-color(blue, $alpha: -35%);
+/// }
+///
+/// :root {
+/// 	--shadow-small: 1px 2px 8px var(--shadow-color, hsla(0, 0%, 0%, 0.25));
+/// 	--shadow-medium: 1px 4px 12px var(--shadow-color, hsla(0, 0%, 0%, 0.25));
+/// 	...
+/// 	--shadow-color: hsla(240, 100%, 50%, 0.65);
+/// }
+///
+/// @example scss - **customize shadow color on selector level**
+/// .card {
+///		@include create-shadow-color(turquoise, $recompute-shadow-key: small);
+/// 	box-shadow: var(--shadow-small);
+/// }
+///
+/// .card {
+/// 	--shadow-color: hsla(174, 72.0720720721%, 56.4705882353%, 0.25);
+/// 	--shadow-small: 1px 2px 8px var(--shadow-color, hsla(0, 0%, 0%, 0.25));
+/// 	box-shadow: var(--shadow-small);
+/// 	...
+///  }
+
+$shadows: (
+	'small': 1px 2px 8px var(--shadow-color, hsla(0, 0%, 0%, 0.25)),
+	'medium': 1px 4px 12px var(--shadow-color, hsla(0, 0%, 0%, 0.25)),
+	'large': 1px 8px 20px var(--shadow-color, hsla(0, 0%, 0%, 0.25)),
+	'drop-small': 1px 1px 2px var(--shadow-color, hsla(0, 0%, 0%, 0.25)),
+	'drop-medium': 2px 2px 2px var(--shadow-color, hsla(0, 0%, 0%, 0.25)),
+	'drop-large': 3px 3px 2px var(--shadow-color, hsla(0, 0%, 0%, 0.25)),
+	'inset-small': inset 1px 1px 8px var(--shadow-color, hsla(0, 0%, 0%, 0.25)),
+	'inset-medium': inset 1px 1px 12px var(--shadow-color, hsla(0, 0%, 0%, 0.25)),
+	'inset-large': inset 2px 2px 16px var(--shadow-color, hsla(0, 0%, 0%, 0.25)),
+);
+

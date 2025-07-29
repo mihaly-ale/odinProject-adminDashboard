@@ -1,0 +1,45 @@
+@use 'sass:math';
+@use 'sass:map';
+@use 'sass:meta';
+
+//# Round number
+/// Round `$number` to a fixed number of decimals places
+/// @group helpers
+///
+/// @param {Number} $number - the number to round
+/// @param {Number} $digits - number of decimal places (default: 3)
+@function round-to($number, $digits: 3) {
+	$power: math.pow(10, $digits);
+	@return math.div(math.round($number * $power), $power);
+}
+
+//# Merge maps
+/// Merge maps to extend pre-defined maps
+///
+/// **Note:** See how to use it: [color helpers](#overrides-variable-new-colors)
+///
+/// **Note:** See below pre-defined [maps](#maps) to extend
+///
+/// @group helpers
+/// @see $font-weight-aliases
+/// @see $sizes
+/// @see $widths
+/// @see $offsets
+/// @see $shadows
+/// @see $breakpoints
+/// @see $utopia-config
+///
+/// @param {Map} $source-map - the pre-defined map
+/// @param {Map} $target-map - the newly created map
+
+@function safe-map-merge($source-map, $target-map) {
+	@if meta.type-of($source-map) != 'map' {
+		@error "First argument must be a map. Got #{meta.type-of($source-map)}";
+	}
+	@if meta.type-of($target-map) != 'map' {
+		@error "Second argument must be a map. Got #{meta.type-of($target-map)}";
+	}
+
+	@return map.merge($source-map, $target-map);
+}
+

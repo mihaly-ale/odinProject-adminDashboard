@@ -1,0 +1,147 @@
+@use 'sass:map';
+@use './tokens' as *;
+@use './overrides' as *;
+
+//# Neutrals
+
+////
+/// @group variables
+/// @type Color
+////
+
+///
+$clr-black: hsl(0deg 0% 0%);
+///
+$clr-black-1: hsl(0deg 0% 1%);
+///
+$clr-black-2: hsl(0deg 0% 2%);
+///
+$clr-black-3: hsl(0deg 0% 4%);
+///
+$clr-black-4: hsl(0deg 0% 6%);
+///
+$clr-white: hsl(0deg 0% 100%);
+///
+$clr-white-1: hsl(0deg 0% 99%);
+///
+$clr-white-2: hsl(0deg 0% 98%);
+///
+$clr-white-3: hsl(0deg 0% 96%);
+///
+$clr-white-4: hsl(0deg 0% 94%);
+///
+$clr-gray-10: hsl(0deg 0% 90%);
+///
+$clr-gray-20: hsl(0deg 0% 80%);
+///
+$clr-gray-30: hsl(0deg 0% 70%);
+///
+$clr-gray-40: hsl(0deg 0% 60%);
+///
+$clr-gray-50: hsl(0deg 0% 50%);
+///
+$clr-gray-60: hsl(0deg 0% 40%);
+///
+$clr-gray-70: hsl(0deg 0% 30%);
+///
+$clr-gray-80: hsl(0deg 0% 20%);
+///
+$clr-gray-90: hsl(0deg 0% 10%);
+
+//# Base colors
+/// @type Color
+$clr-red: red;
+///
+$clr-green: green;
+///
+$clr-blue: blue;
+
+//# Sizes
+/// @type Number
+$size-1: 0.0625em;
+///
+$size-2: 0.125em;
+///
+$size-3: 0.25em;
+///
+$size-4: 0.5em;
+///
+$size-5: 0.75em;
+///
+$size-6: 1em;
+///
+$size-7: 1.25em;
+///
+$size-8: 1.5em;
+///
+$size-9: 1.75em;
+///
+$size-10: 2em;
+///
+$size-11: 2.5em;
+///
+$size-12: 3em;
+///
+$size-13: 4em;
+///
+$size-14: 5em;
+///
+$size-15: 6em;
+///
+$size-16: 8em;
+///
+$size-17: 10em;
+///
+$size-18: 12em;
+///
+$size-19: 14em;
+
+//# Widths
+/// @type Number
+$default-min-width: 320px;
+///
+$default-sidebar-width: 300px;
+///
+$default-content-width: 1200px;
+///
+$default-par-min-width: 40ch;
+///
+$default-par-max-width: 80ch;
+
+//# Offsets
+/// @type Number
+$punctuation-offset-systemUi: -0.4em;
+///
+$default-scroll-top-offset: 2ex;
+
+//# Button properties
+/// @type Number
+$default-btn-border-width: 2px;
+///
+$btn-padding-no-border: 0.75em 1.25em;
+///
+$btn-padding-with-border: calc(
+		0.75em - calc(var(--btn-border-width) - $default-btn-border-width)
+	)
+	calc(1.25em - calc(var(--btn-border-width) - $default-btn-border-width));
+
+//# Layout
+/// @type Number
+$section-dynamic-padding: 10vh;
+///
+$section-max-padding: $size-14;
+///
+$section-padding: min(
+	var(--section-max-padding, $section-max-padding),
+	var(--section-dynamic-padding, $section-dynamic-padding)
+);
+
+//# Components
+/// @type Number
+$cards-gap: clamp(var(--size-7), 5vw, var(--size-10));
+
+//# From overrides
+/// @type Color
+$primary-light: map.get($colors, 'light');
+$primary-dark: map.get($colors, 'dark');
+

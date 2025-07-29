@@ -1,0 +1,115 @@
+@use 'sass:map';
+@use './functions' as *;
+@use './tokens' as *;
+@use './breakpoints' as *;
+@use './utopia' as *;
+
+//! ** Note: ** This file is to override maps defined in `_tokens.scss`, `_breakpoints.scss` and `_type-scale.scss`
+
+//# Override or extend the `$colors` map
+/// Override or extend the `$colors` map
+///
+/// **Note:** If used on the `$colors` map  it will alter the  CSS custom properties via `@mixin create-base-colors` and `@mixin create-shades`.
+///
+/// @group How to override maps
+///
+/// @see $colors
+///
+/// @see {mixins} create-base-colors
+/// @see {mixins} create-shades
+///
+/// @example scss - Override or extend color tokens
+/// $new-colors: (
+///		'red': salmon,
+///		'dark': indigo,
+/// );
+///
+/// $colors: map.merge($colors, $new-colors) !global;
+///
+///  @debug $colors; // ([...], "red": salmon, [...], "dark": indigo)
+///
+/// :root {
+/// 	...
+/// 	--clr-red: salmon; // original red value is overwritten
+/// 	...
+/// }
+///
+/// :root {
+/// 	...
+/// 	--clr-red-10: hsl(6deg 93% 90%); // hue and saturation values altered
+/// 	...
+/// }
+///
+$new-colors: (
+	'red': salmon,
+	'dark': indigo,
+	'light': ghostwhite,
+);
+
+$colors: map.merge($colors, $new-colors) !global;
+
+//# Override or extend the `$breakpoints` map
+/// Override or extend the `$breakpoints` map
+///
+/// @group How to override maps
+///
+/// @see $breakpoints
+///
+/// @see {mixins} mq
+///
+/// @example scss - Override or extend breakpoint values
+/// $new-breakpoints: (
+///		'large': 1200px,
+///		'largest': 87.5em,
+/// );
+///
+/// $breakpoints: map.merge($breakpoints, $new-breakpoints) !global;
+///
+///  @debug $breakpoints; // ([...], "large": 1200px, "largest": 87.5em )
+///
+$new-breakpoints: (
+	'large': 1200px,
+	'largest': 87.5em,
+);
+
+$breakpoints: map.merge($breakpoints, $new-breakpoints) !global;
+
+//# Override `$utopia-config` map
+/// Override `$utopia-config` map
+///
+/// **Note:** Use the `$type-scales` map to change `minTypeScale` and `maxTypeScale` key values.
+///
+/// @group How to override maps
+///
+/// @see $utopia-config
+/// @see $type-scales
+///
+/// @link https://utopia.fyi/ Utopia
+///
+/// @example scss
+/// $new-utopia-config: (
+///		'minFontSize': 18,
+///		'maxFontSize': 22,
+/// 	'minTypeScale': map.get($type-scales, 'minor-third')
+///		'prefix': fs-,
+/// );
+///
+/// $utopia-config: map.merge($utopia-config, $new-utopia-config);
+///
+///  @debug $utopia-config; // ([...],  "minFontSize": 18, "maxFontSize": 22, "minTypeScale": 1.2, [...], "prefix": fs-)
+///
+/// :root {
+/// 	...
+///		--fs-0: clamp(1.125rem, 1.0179rem + 0.3571vi, 1.375rem); // clamping font sizes between new values
+/// 	...
+/// }
+
+$new-utopia-config: (
+	'minFontSize': 18,
+	'maxFontSize': 22,
+	'minTypeScale': map.get($type-scales, 'minor-third'),
+	'prefix': fs-,
+);
+
+$utopia-config: map.merge($utopia-config, $new-utopia-config);
+
