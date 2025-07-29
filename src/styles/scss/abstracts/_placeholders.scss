@@ -1,0 +1,139 @@
+@use './mixins' as *;
+@use './variables' as *;
+
+//# Utility class — center content with flexbox
+/// Utility class for easy centering
+///
+/// @group utilities
+///
+/// @see flex-center
+///
+/// @example scss
+/// .flex-center {
+/// 	@extend %flex-center;
+/// }
+///
+%flex-center {
+	@include flex-center($gap: 1rem);
+}
+
+//# Placeholder selector for a customizable button base style
+/// Base button style using design tokens via CSS custom properties.
+///
+/// **Note:** States are designed to adapt across different contexts..
+///
+/// - **Layout**: padding, border, radius
+/// - **Colors**: customizable bg/text/border
+/// - **Typography**: font settings
+/// - **States**: hover, focus, active
+///
+/// @group component
+///
+/// @link https://piccalil.li/blog/how-i-build-a-button-component/ Andy Bell - How I build a button component
+///
+/// @example scss
+/// .btn {
+/// 	@extend %button;
+/// }
+///
+/// .btn-dark {
+/// 	@extend %button;
+///
+/// 	--btn-bg-clr: var(--clr-dark);
+/// 	--btn-text-clr: var(--clr-light);
+/// }
+///
+/// .btn-ghost-light {
+///		@extend %button;
+///
+///		--btn-padding: #{$btn-padding-with-border};
+///
+///		--btn-bg-clr: transparent;
+///		--btn-text-clr: var(--clr-dark);
+///
+///		--btn-border-width: 4px;
+///		--btn-border-clr: var(--clr-dark);
+///
+///		--btn-focus-outline-clr: var(--btn-text-clr, #{$clr-white});
+///
+///		--btn-hover-filter-value: none;
+///
+///		&:hover {
+///		--btn-text-clr: var(--clr-light);
+///		--btn-bg-clr: var(--clr-dark);
+///		}
+/// }
+///
+%button {
+	@include flex-center(row);
+	padding: var(--btn-padding, #{$btn-padding-no-border});
+
+	// colors
+	background-color: var(--btn-bg-clr, #{$clr-black});
+	color: var(--btn-text-clr, #{$clr-white});
+	box-shadow: var(--btn-box-shadow, var(--shadow-small));
+
+	// stroke and radius
+	border-width: var(--btn-border-width, $default-btn-border-width);
+	border-style: var(--btn-border-style, solid);
+	border-color: var(--btn-border-clr, var(--btn-bg-clr, transparent));
+	border-radius: var(--btn-border-rad, 0);
+
+	// typography
+	font-weight: var(--btn-fw, 700);
+	font-size: var(--btn-fs, var(--font-size, 1em));
+	font-family: var(--btn-ff, var(--ff-sans));
+	letter-spacing: 0.05ch;
+	line-height: 1.1;
+	text-decoration: none;
+
+	// interactive
+	cursor: pointer;
+
+	transition: all 150ms;
+
+	// states
+	--btn-hover-filter-value: opacity(0.75);
+
+	--btn-focus-outline-width: var(--size-3);
+	--btn-focus-outline-offset: var(--size-2);
+	--btn-focus-outline-clr: var(--btn-bg-clr, #{$clr-black});
+
+	&:active {
+		transform: scale(99%);
+	}
+
+	&:hover {
+		filter: var(--btn-hover-filter-value);
+	}
+
+	&:focus-visible {
+		outline-style: solid;
+		outline-width: var(--btn-focus-outline-width);
+		outline-offset: var(--btn-focus-outline-offset);
+		outline-color: var(--btn-focus-outline-clr);
+	}
+}
+
+//# Utility class - for inline icons
+/// Utility class for base icon styles
+///
+/// @group component
+///
+/// @see icon-defaults
+///
+/// @example scss - inspired by the .icon class used in the MDN footer
+/// .icon-mask {
+/// 	@extend %icon;
+///
+/// 	background-color: var(--icon-btn-clr, currentColor);
+/// 	mask-image: url('/send.svg');
+/// 	mask-position: left;
+/// 	mask-repeat: no-repeat;
+/// 	mask-size: cover;
+/// }
+///
+%icon {
+	@include icon-defaults;
+}
+

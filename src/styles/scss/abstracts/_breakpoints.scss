@@ -1,0 +1,16 @@
+//# Breakpoints map for `@mixin ms`
+/// Breakpoints
+///
+/// **Note:** Refer to the `@mixin mq` for how to use this mixin.
+///
+/// @group maps
+///
+/// @type Map <String, Number>
+///
+/// @see mq
+///
+$breakpoints: (
+	'small': 30em,	/* 480px */
+	'medium': 45em, /* 720px */
+	'large': 65em,  /* 1040px */
+);
