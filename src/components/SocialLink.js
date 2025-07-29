@@ -23,4 +23,3 @@ export default function createSocialLink(sprite, id) {
 
 	return a;
 }
-

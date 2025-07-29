@@ -1,4 +1,38 @@
+@use '../abstracts/' as *;
+
 /* Card start */
 
-/* Card end */
+.cards {
+	display: grid;
+	grid-template-columns: repeat(
+		auto-fit,
+		minmax(min(var(--par-min-width), 100%), 1fr)
+	);
+	grid-template-rows: auto;
+	gap: $cards-gap;
 
+	padding-block: $section-padding;
+	padding-inline: var(--size-6);
+}
+
+.card {
+	padding-block: clamp(var(--size-6), 5vw, var(--size-10));
+	padding-inline: max(var(--size-8), 10%);
+}
+
+.card:nth-child(1) {
+	@include create-shadow-color(turquoise, $recompute-shadow-key: small);
+	box-shadow: var(--shadow-small);
+}
+
+.card:nth-child(2) {
+	@include create-shadow-color(red, $recompute-shadow-key: medium);
+	box-shadow: var(--shadow-medium);
+}
+
+.card:nth-child(3) {
+	@include create-shadow-color(green, $recompute-shadow-key: large);
+	box-shadow: var(--shadow-large);
+}
+
+/* Card end */

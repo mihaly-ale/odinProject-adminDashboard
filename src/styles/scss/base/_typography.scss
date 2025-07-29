@@ -1,4 +1,50 @@
+@use '../abstracts/' as *;
+
 /* Typography start */
 
-/* Typography end */
+body {
+	font-family: var(--ff-sans, $system-ui);
+	font-weight: var(--fw-normal);
+}
 
+:where(h1, h2, h3, h4, h5, h6) {
+	font-family: var(--ff-serif);
+}
+
+h1,
+.h1 {
+	font-size: var(--fs-5);
+}
+
+h2,
+.h2 {
+	font-size: var(--fs-4);
+}
+
+h3,
+.h3 {
+	font-size: var(--fs-3);
+}
+
+h4,
+.h4 {
+	font-size: var(--fs-2);
+}
+
+.large {
+	font-size: var(--fs-1);
+}
+
+body {
+	font-size: var(--fs-0);
+}
+
+small {
+	font-size: var(--fs--1);
+}
+
+p {
+	font-weight: var(--fw-slim);
+}
+
+/* Typography end */

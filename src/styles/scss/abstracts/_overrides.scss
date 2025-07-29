@@ -41,9 +41,11 @@
 /// }
 ///
 $new-colors: (
-	'red': salmon,
-	'dark': indigo,
-	'light': ghostwhite,
+	'plum': #be95f5,
+	'peach': #f5cc96,
+	'pink': #e87da1,
+	'dark': #32293d,
+	'light': #f9f3ec,
 );
 
 $colors: map.merge($colors, $new-colors) !global;
@@ -106,10 +108,9 @@ $breakpoints: map.merge($breakpoints, $new-breakpoints) !global;
 
 $new-utopia-config: (
 	'minFontSize': 18,
-	'maxFontSize': 22,
 	'minTypeScale': map.get($type-scales, 'minor-third'),
+	'maxTypeScale': map.get($type-scales, 'minor-third'),
 	'prefix': fs-,
 );
 
 $utopia-config: map.merge($utopia-config, $new-utopia-config);
-

@@ -1,3 +1,22 @@
+@use '../abstracts/' as *;
+
 /* Grid start*/
+
+.content {
+	display: grid;
+	grid-template-columns:
+		1fr
+		min(var(--content-width, $default-content-width), 100%)
+		1fr;
+
+	& > * {
+		grid-column: 2;
+	}
+}
+
+.full-bleed {
+	width: 100%;
+	grid-column: 1 / 4;
+}
 
 /* Grid end*/

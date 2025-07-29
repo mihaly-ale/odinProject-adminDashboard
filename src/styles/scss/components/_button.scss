@@ -1,4 +1,94 @@
+@use '../abstracts/' as *;
+
 /* Button start */
 
-/* Button end */
+.btn {
+	@extend %button;
+}
 
+.btn-primary {
+	@extend %button;
+
+	--btn-bg-clr: var(--clr-primary-dark);
+	--btn-text-clr: var(--clr-light);
+}
+
+.btn-secondary {
+	@extend %button;
+
+	--btn-bg-clr: var(--clr-secondary);
+	--btn-text-clr: var(--clr-dark);
+}
+
+.btn-tertiary {
+	@extend %button;
+
+	--btn-bg-clr: var(--clr-pink-50);
+	--btn-text-clr: var(--clr-light);
+}
+
+.btn-secondary-light {
+	@extend %button;
+
+	--btn-bg-clr: var(--clr-light);
+	--btn-text-clr: var(--clr-tertiary-dark);
+	--btn-border-clr: var(--btn-text-clr);
+}
+
+// .btn-ghost-light {
+// 	@extend %button;
+
+// 	--btn-padding: #{$btn-padding-with-border};
+
+// 	--btn-bg-clr: transparent;
+// 	--btn-text-clr: var(--clr-dark);
+
+// 	--btn-border-width: 4px;
+// 	--btn-border-clr: var(--clr-dark);
+
+// 	--btn-focus-outline-clr: var(--btn-text-clr, #{$clr-white});
+
+// 	--btn-hover-filter-value: none;
+
+// 	&:hover {
+// 		--btn-text-clr: var(--clr-light);
+// 		--btn-bg-clr: var(--clr-dark);
+// 	}
+// }
+
+// .btn-ghost-dark {
+// 	@extend %button;
+
+// 	--btn-padding: #{$btn-padding-with-border};
+
+// 	--btn-bg-clr: transparent;
+// 	--btn-text-clr: var(--clr-light);
+
+// 	--btn-border-width: 4px;
+// 	--btn-border-clr: var(--clr-light);
+
+// 	--btn-focus-outline-clr: var(--btn-text-clr, #{$clr-white});
+
+// 	--btn-hover-filter-value: none;
+
+// 	&:hover {
+// 		--btn-text-clr: var(--clr-dark);
+// 		--btn-bg-clr: var(--clr-light);
+// 	}
+// }
+
+.icon {
+	@extend %icon;
+}
+
+.icon-mask {
+	@extend %icon;
+
+	background-color: var(--icon-btn-clr, currentColor);
+	mask-image: url('/send.svg');
+	mask-position: left;
+	mask-repeat: no-repeat;
+	mask-size: cover;
+}
+
+/* Button end */

@@ -145,3 +145,7 @@ $cards-gap: clamp(var(--size-7), 5vw, var(--size-10));
 $primary-light: map.get($colors, 'light');
 $primary-dark: map.get($colors, 'dark');
 
+//# Brand colors
+$clr-plum: map.get($colors, 'plum');
+$clr-peach: map.get($colors, 'peach');
+$clr-pink: map.get($colors, 'pink');

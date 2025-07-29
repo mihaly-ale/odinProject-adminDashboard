@@ -2,10 +2,8 @@
 import '../src/styles/scss/main.scss';
 
 // Assets
-import viteLogo from '/src/assets/vite.svg';
-import jsLogo from '/src/assets/javascript.svg';
-import devLogo from '/src/assets/ma.svg';
-import iconSprite from '/src/assets/icon-sprite.svg';
+import devLogo from '/ma.svg';
+import socialIconSprite from '/src/assets/social-icon-sprite.svg';
 const cardContents = [
 	{
 		title: 'Sass',
@@ -44,12 +42,11 @@ import createSocialLink from './components/SocialLink.js';
 document.querySelector('#app').innerHTML = `
   <header class="flex-center full-bleed">
     <div class="container-header-logo">
-      <a href="https://vite.dev" target="_blank">
-        <img src="${viteLogo}" class="logo" alt="Vite logo" width="80" height="80"/>
-      </a>
-      <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank">
-        <img src="${jsLogo}" class="logo" alt="JavaScript logo" width="80" height="80"/>
-      </a>
+      <img src="/__logos#sprite-logomark-dark-view" class="logo" alt="" width="80" height="80"/>
+      <img src="/__logos#sprite-logomark-light-view" class="logo" alt="" width="80" height="80"/>
+      <img src="/__logos#sprite-wordmark-dark-view" class="logo" alt="" width="160" height="20"/>
+      <img src="/__logos#sprite-wordmark-light-view" class="logo" alt="" width="160" height="20"/>
+
     </div>
 
     <h1 class="center-text">Vite + Javascript</h1>
@@ -72,19 +69,20 @@ document.querySelector('#app').innerHTML = `
   <footer class="full-bleed">
     <section class="button-container flex-center">
 
-      <button type="button" class="btn-dark">Button</button>      <div class="btn-light-wrapper">
-        <button type="button" class="btn-light">Button</button>
-        <button type="button" class="btn-ghost-dark">Button</button>
-      </div>
-      <button type="button" class="btn-ghost-light">
-        <span class="icon-mask"></span>
-        Button
-      </button>
+      <button type="button" class="btn-primary">Button</button>
+      <button type="button" class="btn-secondary">Button</button>
+      <button type="button" class="btn-tertiary">Button</button>
+      <button type="button" class="btn-secondary-light">Button</button>
 
+
+      <svg class="icon">
+        <use xlink:href="/__icons#sprite-book-fill"></use>
+      </svg>
     </section>
 
     <div class="social-icons">
     </div>
+
 
     <p>
       Template made by
@@ -92,6 +90,11 @@ document.querySelector('#app').innerHTML = `
         <img src="${devLogo}" class="dev-logo" width="32" height="32"/>
       </a>
     </p>
+
+
+
+
+
 
 
   </footer>
@@ -108,7 +111,6 @@ cardContents.forEach((content) => {
 
 const SocialIcons = document.querySelector('.social-icons');
 socialLinks.forEach((item) => {
-	const link = createSocialLink(iconSprite, item);
+	const link = createSocialLink(socialIconSprite, item);
 	SocialIcons.appendChild(link);
 });
-

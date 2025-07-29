@@ -1,4 +1,51 @@
+@use '../abstracts/' as *;
+
 /* General start */
 
-/* General end */
+body {
+	--body-bg-clr: var(--clr-light);
+	--body-text-clr: var(--clr-dark);
+	background-color: var(--body-bg-clr, (var(--clr-light, #{$clr-white})));
+	color: var(--body-text-clr, (var(--clr-dark, #{$clr-black})));
+}
 
+#app {
+	overflow: hidden;
+}
+
+img::after {
+	content: 'Sorry, the image could not be loaded.';
+	display: block;
+	margin-block: 1ex;
+	font-size: var(--fs-0);
+}
+
+.logo:hover {
+	--logo-hover-color-1: var(--body-bg-clr, var(--clr-light, #{$clr-white}));
+	--logo-hover-color-2: var(--body-text-clr, var(--clr-dark, #{$clr-black}));
+
+	--logo-hover-color-1-ratio: 60%;
+	--logo-hover-color-2-ratio: 40%;
+
+	--logo-hover-shadow-color: color-mix(
+		in hsl,
+		var(--logo-hover-color-1) var(--logo-hover-color-1-ratio),
+		var(--logo-hover-color-2) var(--logo-hover-color-2-ratio)
+	);
+
+	filter: drop-shadow(0 0 2em var(--logo-hover-shadow-color));
+}
+
+.btn-light-wrapper {
+	@include flex-center($dir: row);
+
+	width: 100%;
+	background-color: var(--clr-dark);
+	padding: var(--size-10);
+}
+
+.button-container {
+	width: 100%;
+}
+
+/* General end */

@@ -1,4 +1,50 @@
+@use '../abstracts/' as *;
+
 /* Link start */
 
-/* Link end */
+a {
+	--_bg-clr: var(--body-bg-clr, var(--clr-light, #{$clr-white}));
+	--_text-clr: var(--body-text-clr, var(--clr-dark, #{$clr-black}));
 
+	--link-visited-text-clr: color-mix(
+		in oklab,
+		var(--_bg-clr) 20%,
+		var(--_text-clr) 80%
+	);
+
+	--link-hover-bg-clr: color-mix(
+		in oklab,
+		var(--_bg-clr) 80%,
+		var(--_text-clr) 20%
+	);
+
+	--link-active-bg-clr: color-mix(
+		in oklab,
+		var(--_bg-clr) 30%,
+		var(--_text-clr) 70%
+	);
+}
+
+a:visited {
+	color: var(--link-visited-text-clr);
+}
+
+a:not(:has(svg, img)):hover {
+	background-color: var(--link-hover-bg-clr);
+}
+
+a:focus-visible {
+	outline-width: var(--link-outline-width, 2px);
+	outline-style: solid;
+	outline-offset: var(--link-outline-offset, 2px);
+	outline-color: var(--body-text-clr, var(--clr-dark, #{$clr-black}));
+
+	text-decoration-color: transparent;
+}
+
+a:active {
+	color: var(--body-bg-clr) !important;
+	background-color: var(--body-text-clr) !important;
+}
+
+/* Link end */
