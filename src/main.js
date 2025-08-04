@@ -40,50 +40,24 @@ import createCard from './components/Card.js';
 import createSocialLink from './components/SocialLink.js';
 
 document.querySelector('#app').innerHTML = `
-  <header class="flex-center full-bleed">
-    <div class="container-header-logo">
-      <img src="/__logos#sprite-logomark-dark-view" class="logo" alt="" width="80" height="80"/>
-      <img src="/__logos#sprite-logomark-light-view" class="logo" alt="" width="80" height="80"/>
-      <img src="/__logos#sprite-wordmark-dark-view" class="logo" alt="" width="160" height="20"/>
-      <img src="/__logos#sprite-wordmark-light-view" class="logo" alt="" width="160" height="20"/>
-
-    </div>
-
-    <h1 class="center-text">Vite + Javascript</h1>
-    <button  id="counter" type="button" class="btn"></button>
-
+  <header id="header" class="flex-center">
+    header
     <p class="center-text">
-      Click on the Vite logo to learn more
+    search comes here
     </p>
   </header>
 
-  <main>
-    <section class="cards">
-    </section>
-    <blockquote class="flex-center">
-      <p>"There is always one more bug to fix ... Society may want to put its trust in computers, but it should know the facts: a bug, fix it. Another bug, fix it. The 'fix' itself may introduce a new bug. And so on."</p>
-      <cite class="center-text">Ellen Ullman, <i>Close to the Machine: Technophilia and Its Discontents</i>.</cite>
-    </blockquote>
+  <aside id="aside">
+  <img src="/__logos#sprite-wordmark-light-view" class="logo" alt="" width="160" height="20"/>
+    <p>sidebar</p>
+  </aside>
+
+  <main id="main">
+    <h1 class="center-text">Collections</h1>
+    <section class="cards"></section>
   </main>
 
-  <footer class="full-bleed">
-    <section class="button-container flex-center">
-
-      <button type="button" class="btn-primary">Button</button>
-      <button type="button" class="btn-secondary">Button</button>
-      <button type="button" class="btn-tertiary">Button</button>
-      <button type="button" class="btn-secondary-light">Button</button>
-
-
-      <svg class="icon">
-        <use xlink:href="/__icons#sprite-book-fill"></use>
-      </svg>
-    </section>
-
-    <div class="social-icons">
-    </div>
-
-
+  <footer id="footer">
     <p>
       Template made by
       <a href="https://github.com/mihaly-ale">
@@ -91,16 +65,12 @@ document.querySelector('#app').innerHTML = `
       </a>
     </p>
 
-
-
-
-
-
-
+    <!--
+      <div class="social-icons">
+      </div>
+    -->
   </footer>
 `;
-
-setupCounter(document.querySelector('#counter'));
 
 const cardGrid = document.querySelector('.cards');
 
