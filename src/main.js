@@ -4,6 +4,7 @@ import '../src/styles/scss/main.scss';
 // Assets
 import devLogo from '/ma.svg';
 import socialIconSprite from '/src/assets/social-icon-sprite.svg';
+
 const cardContents = [
 	{
 		title: 'Sass',
@@ -35,16 +36,12 @@ const socialLinks = [
 ];
 
 // Components
-import { setupCounter } from './components/counter.js';
+import createHeader from './components/header/Header.js';
 import createCard from './components/Card.js';
-import createSocialLink from './components/SocialLink.js';
+// Import createSocialLink from './components/SocialLink.js';
 
 document.querySelector('#app').innerHTML = `
-  <header id="header" class="flex-center">
-    header
-    <p class="center-text">
-    search comes here
-    </p>
+  <header id="header">
   </header>
 
   <aside id="aside">
@@ -72,6 +69,9 @@ document.querySelector('#app').innerHTML = `
   </footer>
 `;
 
+const header = document.getElementById('header');
+createHeader(header);
+
 const cardGrid = document.querySelector('.cards');
 
 cardContents.forEach((content) => {
@@ -79,8 +79,8 @@ cardContents.forEach((content) => {
 	cardGrid.appendChild(card);
 });
 
-const SocialIcons = document.querySelector('.social-icons');
-socialLinks.forEach((item) => {
-	const link = createSocialLink(socialIconSprite, item);
-	SocialIcons.appendChild(link);
-});
+// Const SocialIcons = document.querySelector('.social-icons');
+// socialLinks.forEach((item) => {
+// 	const link = createSocialLink(socialIconSprite, item);
+// 	SocialIcons.appendChild(link);
+// });

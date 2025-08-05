@@ -13,4 +13,3 @@ export default function createCard(props) {
 
 	return card;
 }
-
