@@ -50,19 +50,26 @@
 					id="search-input"
 					placeholder="Search ..." />
 				<label for="search-input" class="visually-hidden">Search</label>
-				<button type="submit">
-					<img src="/__icons#sprite-search-line-view" alt="" class="icon" />
+				<button type="submit" class="no-style-btn">
+					<svg class="icon">
+						<use xlink:href="/__icons#sprite-search-line"></use>
+					</svg>
 					<span class="visually-hidden">Perform Search</span>
 				</button>
 			</form>
 
 			<p class="account-info-box">
+				<svg class="icon">
+					<use xlink:href="/__icons#sprite-message-empty-line"></use>
+				</svg>
+				<span class="welcome-msg" id="msg-indicator" data-message-count="4"
+					>Hi, Marthy!</span
+				>
 				<img
-					src="/__icons#sprite-message-empty-line-view"
+					src="src/assets/avatars/marthy.webp"
 					alt=""
-					class="icon" />
-				<span class="welcome-msg">Hi, Marthy!</span>
-				<img src="src/assets/avatars/marthy.webp" alt="" class="icon" />
+					class="icon"
+					id="avatar" />
 			</p>
 		</header>
 		<div id="app" class="content"></div>

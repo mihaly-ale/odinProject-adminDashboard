@@ -35,35 +35,18 @@ const socialLinks = [
 ];
 
 // Components
-import { setupCounter } from './components/counter.js';
 import createCard from './components/Card.js';
 import createSocialLink from './components/SocialLink.js';
 
 document.querySelector('#app').innerHTML = `
-  <header class="flex-center full-bleed">
-    <div class="container-header-logo">
-      <img src="/__logos#sprite-logomark-dark-view" class="logo" alt="" width="80" height="80"/>
-      <img src="/__logos#sprite-logomark-light-view" class="logo" alt="" width="80" height="80"/>
-      <img src="/__logos#sprite-wordmark-dark-view" class="logo" alt="" width="160" height="20"/>
-      <img src="/__logos#sprite-wordmark-light-view" class="logo" alt="" width="160" height="20"/>
+  <aside id="aside">
+  <img src="/__logos#sprite-wordmark-light-view" class="logo" alt="" width="160" height="20"/>
+    <p>sidebar</p>
+  </aside>
 
-    </div>
-
-    <h1 class="center-text">Vite + Javascript</h1>
-    <button  id="counter" type="button" class="btn"></button>
-
-    <p class="center-text">
-      Click on the Vite logo to learn more
-    </p>
-  </header>
-
-  <main>
-    <section class="cards">
-    </section>
-    <blockquote class="flex-center">
-      <p>"There is always one more bug to fix ... Society may want to put its trust in computers, but it should know the facts: a bug, fix it. Another bug, fix it. The 'fix' itself may introduce a new bug. And so on."</p>
-      <cite class="center-text">Ellen Ullman, <i>Close to the Machine: Technophilia and Its Discontents</i>.</cite>
-    </blockquote>
+  <main id="main">
+    <h1 class="center-text">Collections</h1>
+    <section class="cards"></section>
   </main>
 
   <footer class="full-bleed">
