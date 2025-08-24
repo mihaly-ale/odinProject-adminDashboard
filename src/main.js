@@ -39,34 +39,23 @@ import createCard from './components/Card.js';
 import createSocialLink from './components/SocialLink.js';
 
 document.querySelector('#app').innerHTML = `
-  <aside id="aside">
-  <img src="/__logos#sprite-wordmark-light-view" class="logo" alt="" width="160" height="20"/>
-    <p>sidebar</p>
-  </aside>
+	<aside id="aside">
+		<img src="/__logos#sprite-wordmark-light-view" class="logo" alt="" width="160" height="20"/>
+		<p>sidebar</p>
+	</aside>
 
-  <main id="main">
-    <h1 class="center-text">Collections</h1>
-    <section class="cards"></section>
-  </main>
+	 <main>
+		<section class="cards">
+		<h1 class="center-text">Collections</h1>
+		</section>
+		<blockquote class="flex-center">
+			<p>"There is always one more bug to fix ... Society may want to put its trust in computers, but it should know the facts: a bug, fix it. Another bug, fix it. The 'fix' itself may introduce a new bug. And so on."</p>
+			<cite class="center-text">Ellen Ullman, <i>Close to the Machine: Technophilia and Its Discontents</i>.</cite>
+		</blockquote>
+ 	</main>
 
-  <footer class="full-bleed">
-    <section class="button-container flex-center">
-
-      <button type="button" class="btn-primary">Button</button>
-      <button type="button" class="btn-secondary">Button</button>
-      <button type="button" class="btn-tertiary">Button</button>
-      <button type="button" class="btn-secondary-light">Button</button>
-
-
-      <svg class="icon">
-        <use xlink:href="/__icons#sprite-book-fill"></use>
-      </svg>
-    </section>
-
-    <div class="social-icons">
-    </div>
-
-
+	 <footer id="footer">
+	 	<p>footer</P>
     <p>
       Template made by
       <a href="https://github.com/mihaly-ale">
