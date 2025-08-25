@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 	<head>
 		<title>A Vite template</title>
@@ -37,11 +37,62 @@
 			href="/favicons/apple-touch-icon.png" />
 		<meta name="apple-mobile-web-app-title" content="MyWebSite" />
 		<link rel="manifest" href="/favicons/site.webmanifest" />
+		<script type="module" src="/src/main.js"></script>
 	</head>
 
 	<body>
-		<div id="app" class="content"></div>
-		<script type="module" src="/src/main.js"></script>
+		<header id="header">
+			<form action="" class="search-box">
+				<input
+					type="search"
+					name="search-input"
+					id="search-input"
+					placeholder="Search ..." />
+				<label for="search-input" class="visually-hidden">Search</label>
+				<button type="submit" class="no-style-btn">
+					<svg class="icon">
+						<use xlink:href="/__icons#sprite-search-line"></use>
+					</svg>
+					<span class="visually-hidden">Perform Search</span>
+				</button>
+			</form>
+
+			<p class="account-info-box">
+				<svg class="icon">
+					<use xlink:href="/__icons#sprite-message-empty-line"></use>
+				</svg>
+				<span class="welcome-msg" id="msg-indicator" data-message-count="4"
+					>Hi, Marthy!</span
+				>
+				<img
+					src="src/assets/avatars/marthy.webp"
+					alt=""
+					class="icon"
+					id="avatar" />
+			</p>
+		</header>
+
+		<aside id="aside">
+			<img
+				src="/__logos#sprite-wordmark-light-view"
+				class="logo"
+				alt=""
+				width="160"
+				height="20" />
+			<p>sidebar</p>
+		</aside>
+
+		<main id="main" class="content"></main>
+		<footer id="footer">
+			<p>footer</p>
+			<p>
+				Template made by
+				<a href="https://github.com/mihaly-ale">
+					<img src="${devLogo}" class="dev-logo" width="32" height="32" />
+				</a>
+			</p>
+
+			<div class="social-icons"></div>
+		</footer>
 	</body>
 </html>
-

@@ -2,21 +2,45 @@
 
 /* Grid start*/
 
-.content {
-	display: grid;
-	grid-template-columns:
-		1fr
-		min(var(--content-width, $default-content-width), 100%)
-		1fr;
-
-	& > * {
-		grid-column: 2;
-	}
+#aside {
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	width: 100%;
 }
 
-.full-bleed {
-	width: 100%;
-	grid-column: 1 / 4;
+@include mq(medium) {
+	body {
+		height: 100vh;
+		display: grid;
+		grid-template-columns:
+			var(--sidebar-width)
+			1fr;
+		grid-template-rows:
+			min-content
+			1fr
+			min-content;
+	}
+
+	#header {
+		grid-column: 2 / 3;
+	}
+
+	#main {
+		grid-column: 2 / -1;
+		grid-row: 2 / -1;
+	}
+
+	#aside {
+		grid-column: 1 / 2;
+		grid-row: 1 / 3;
+		position: static;
+	}
+
+	#footer {
+		grid-column: 1 / 2;
+		grid-row: 3 / 4;
+	}
 }
 
 /* Grid end*/

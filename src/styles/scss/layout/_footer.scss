@@ -2,42 +2,12 @@
 
 /* Footer start*/
 footer {
-	grid-template-columns: subgrid;
+	background-color: var(--clr-dark);
+	color: var(--clr-light);
 
-	display: grid;
-	gap: var(--size-12);
-
-	--section-max-padding: var(--size-17);
-	padding-block-start: $section-padding;
-
-	.button-container {
-		grid-column: 1 / 4;
-		padding-block-end: var(--size-6);
-	}
-
-	.social-icons {
-		grid-column: 2 / 3;
-		@include flex-center($dir: row);
-
-		& > a {
-			transition: 150ms;
-
-			&:hover {
-				scale: 1.1;
-			}
-		}
-	}
-
-	p:has(.dev-logo) {
-		grid-column: 1 / 4;
-		max-inline-size: 100%;
-		text-align: center;
-		padding-block: var(--size-6);
-		background-color: var(--clr-blue-10);
-	}
-
-	.dev-logo {
-		display: inline-block;
-	}
+	// temporary styling
+	--appbar-height: 49.25px;
+	margin-bottom: var(--appbar-height);
 }
+
 /* Footer end*/
