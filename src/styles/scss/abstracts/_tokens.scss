@@ -34,12 +34,8 @@ $type-scales: (
 ///
 /// @link https://css-tricks.com/snippets/css/system-font-stack/#comment-1609511 CSS-Tricks - System Font Stack
 ///
-<<<<<<< HEAD
-$system-ui: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif,
-=======
 $system-ui:
 	system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif,
->>>>>>> b7e092d (Setup template for project)
 	'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
 
 //# Font Weights
@@ -315,7 +311,3 @@ $shadows: (
 	'inset-medium': inset 1px 1px 12px var(--shadow-color, hsla(0, 0%, 0%, 0.25)),
 	'inset-large': inset 2px 2px 16px var(--shadow-color, hsla(0, 0%, 0%, 0.25)),
 );
-<<<<<<< HEAD
-
-=======
->>>>>>> b7e092d (Setup template for project)
