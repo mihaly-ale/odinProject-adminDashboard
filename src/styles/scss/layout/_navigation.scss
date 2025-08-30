@@ -1,3 +1,123 @@
+@use '../abstracts/' as *;
+
 /* Navigation start*/
+
+.primary-navigation {
+	@include flex-center;
+	height: 100%;
+}
+
+.nav-list {
+	list-style: none;
+
+	display: flex;
+	justify-content: flex-start;
+	gap: var(--size-6);
+
+	@include mq(small) {
+		flex-direction: column;
+	}
+}
+
+.nav-link {
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-start;
+	gap: var(--size-4);
+
+	border-radius: var(--size-4);
+	padding: var(--size-4);
+	text-decoration: none;
+
+	--_bg-clr: var(--clr-dark);
+	--_text-clr: var(--clr-light);
+
+	/* Small screens: state indicator is only around the icon */
+	/* Large screens: state indicator is the link */
+
+	/* Small screen hover state */
+	&:hover .icon {
+		background-color: var(--_text-clr);
+		color: var(--_bg-clr);
+
+		&:active {
+			scale: 0.95;
+		}
+	}
+
+	/* Large screen hover state */
+	&:hover {
+		background-color: var(--_text-clr);
+		color: var(--_bg-clr);
+
+		/* Force icon to behave as link text */
+		&:active .icon {
+			background-color: inherit;
+			color: inherit;
+		}
+	}
+
+	/* Apply links' focus-visible styles to nav icons on small screens */
+	&:focus-within .icon {
+		outline-style: solid;
+		outline-offset: var(--link-outline-offset, 2px);
+		outline-color: currentColor;
+		outline-width: var(--link-outline-width, 2px);
+
+		text-decoration-color: transparent;
+
+		/* Remove outline from icons on large screens */
+		@include mq(small) {
+			outline-color: transparent;
+		}
+	}
+
+	/* Hide focus outline on small screens, icon already indicates focus */
+	&:focus-visible {
+		outline-color: transparent;
+	}
+
+	/* Add visible outline to .nav-link */
+	&:focus-visible {
+		@include mq(small) {
+			outline-color: currentColor;
+		}
+	}
+
+	.icon {
+		display: inline-block;
+		block-size: 1.5lh;
+		border-radius: var(--size-3);
+
+		@include mq(small) {
+			block-size: 1.15lh;
+		}
+	}
+
+	@include mq(small) {
+		// THIS SHOULD GO MORE UP TO THE ROOT LEVEL OF THE SELECTOR
+		// PADDING ISSUE
+		display: flex;
+		flex-direction: row;
+		justify-content: flex-start;
+		gap: var(--size-4);
+
+		border-radius: var(--size-4);
+		padding: var(--size-4);
+	}
+}
+
+.nav-link-text {
+	@include mq(small) {
+		padding: var(--size-3) var(--size-3) var(--size-1);
+	}
+}
+
+/* Hide on small screen. Svg <title> will add the accessible name*/
+@media (width <= 480px) {
+	.nav-link-text {
+		display: none;
+	}
+}
 
 /* Navigation end*/
