@@ -25,7 +25,7 @@ a {
 	);
 }
 
-a:visited {
+a:not([class]):visited {
 	color: var(--link-visited-text-clr);
 }
 

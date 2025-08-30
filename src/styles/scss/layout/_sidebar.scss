@@ -1,6 +1,14 @@
+@use '../abstracts/' as *;
+
 /* Sidebar start*/
 aside {
 	background-color: var(--clr-dark);
 	color: var(--clr-light);
+
+	@include flex-center;
+
+	.logo {
+		margin-block-start: var(--size-6);
+	}
 }
 /* Sidebar end*/
