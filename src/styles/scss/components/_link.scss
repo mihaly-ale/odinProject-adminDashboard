@@ -5,6 +5,8 @@
 a {
 	--_bg-clr: var(--body-bg-clr, var(--clr-light, #{$clr-white}));
 	--_text-clr: var(--body-text-clr, var(--clr-dark, #{$clr-black}));
+	color: var(--_text-clr);
+	background-color: var(--_bg-clr);
 
 	--link-visited-text-clr: color-mix(
 		in oklab,
