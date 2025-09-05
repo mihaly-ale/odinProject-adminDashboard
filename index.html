@@ -80,88 +80,101 @@
 				alt="Collections"
 				width="160"
 				height="20" />
-			<nav class="primary-navigation">
-				<ul class="nav-list">
-					<li class="nav-list-item">
-						<a href="#home" class="nav-link">
-							<svg class="icon">
-								<title>Home</title>
-								<use xlink:href="/__icons#sprite-home-line"></use>
-							</svg>
-							<span class="nav-link-text" aria-hidden="true">Home</span>
-						</a>
-					</li>
-					<li class="nav-list-item">
-						<a href="#collections" class="nav-link">
-							<svg class="icon">
-								<title>Collections</title>
-								<use xlink:href="/__icons#sprite-disc-line"></use>
-							</svg>
-							<span class="nav-link-text" aria-hidden="true">Collections</span>
-						</a>
-					</li>
-					<li class="nav-list-item">
-						<a href="#marketplace" class="nav-link">
-							<svg class="icon">
-								<title>Marketplace</title>
-								<use xlink:href="/__icons#sprite-shop-line"></use>
-							</svg>
-							<span class="nav-link-text" aria-hidden="true">Marketplace</span>
-						</a>
-					</li>
-					<li class="nav-list-item">
-						<a href="#statistics" class="nav-link">
-							<svg class="icon">
-								<title>Statistics</title>
-								<use xlink:href="/__icons#sprite-chart-line"></use>
-							</svg>
-							<span class="nav-link-text" aria-hidden="true">Statistics</span>
-						</a>
-					</li>
-					<li class="nav-list-item">
-						<a href="#messages" class="nav-link">
-							<svg class="icon">
-								<title>Messages</title>
-								<use xlink:href="/__icons#sprite-message-write-line"></use>
-							</svg>
-							<span class="nav-link-text" aria-hidden="true">Messages</span>
-						</a>
-					</li>
-				</ul>
-			</nav>
 
-			<div class="secondary-navigation">
-				<button class="appsettings-show">
-					<span class="visually-hidden">Show applications settings</span>
-					<svg class="icon">
-						<use xlink:href="/__icons#sprite-menu-line"></use>
-					</svg>
-				</button>
-				<nav>
+			<div class="nav-wrapper">
+				<nav class="primary-navigation">
 					<ul class="nav-list">
 						<li class="nav-list-item">
-							<a href="#help" class="nav-link">Help</a>
+							<a href="#home" class="nav-link">
+								<svg class="icon">
+									<title>Home</title>
+									<use xlink:href="/__icons#sprite-home-line"></use>
+								</svg>
+								<span class="nav-link-text" aria-hidden="true">Home</span>
+							</a>
 						</li>
 						<li class="nav-list-item">
-							<a href="#help" class="nav-link">Settings</a>
+							<a href="#collections" class="nav-link">
+								<svg class="icon">
+									<title>Collections</title>
+									<use xlink:href="/__icons#sprite-disc-line"></use>
+								</svg>
+								<span class="nav-link-text" aria-hidden="true"
+									>Collections</span
+								>
+							</a>
 						</li>
 						<li class="nav-list-item">
-							<a href="#help" class="nav-link">Privacy</a>
+							<a href="#marketplace" class="nav-link">
+								<svg class="icon">
+									<title>Marketplace</title>
+									<use xlink:href="/__icons#sprite-shop-line"></use>
+								</svg>
+								<span class="nav-link-text" aria-hidden="true"
+									>Marketplace</span
+								>
+							</a>
+						</li>
+						<li class="nav-list-item">
+							<a href="#statistics" class="nav-link">
+								<svg class="icon">
+									<title>Statistics</title>
+									<use xlink:href="/__icons#sprite-chart-line"></use>
+								</svg>
+								<span class="nav-link-text" aria-hidden="true">Statistics</span>
+							</a>
+						</li>
+						<li class="nav-list-item">
+							<a href="#messages" class="nav-link">
+								<svg class="icon">
+									<title>Messages</title>
+									<use xlink:href="/__icons#sprite-message-write-line"></use>
+								</svg>
+								<span class="nav-link-text" aria-hidden="true">Messages</span>
+							</a>
 						</li>
 					</ul>
-					<button class="appsettings-close">
-						<span class="visually-hidden">Close application settings</span>
-						<svg class="icon">
-							<use xlink:href="/__icons#sprite-close-line"></use>
-						</svg>
-					</button>
 				</nav>
+
+				<div class="secondary-navigation">
+					<nav>
+						<button
+							popovertarget="appmenu"
+							popovertargetaction="show"
+							class="appsettings-show">
+							<span class="visually-hidden">Show applications settings</span>
+							<svg class="icon">
+								<use xlink:href="/__icons#sprite-menu-line"></use>
+							</svg>
+						</button>
+						<ul id="appmenu" popover>
+							<li class="nav-list-item">
+								<a href="#help" class="nav-link">Help</a>
+							</li>
+							<li class="nav-list-item">
+								<a href="#help" class="nav-link">Settings</a>
+							</li>
+							<li class="nav-list-item">
+								<a href="#help" class="nav-link">Privacy</a>
+							</li>
+							<button
+								popovertarget="appmenu"
+								popovertargetaction="hide"
+								class="appsettings-hide">
+								<span class="visually-hidden">Hide applications settings</span>
+								<svg class="icon">
+									<use xlink:href="/__icons#sprite-close-line"></use>
+								</svg>
+							</button>
+						</ul>
+					</nav>
+				</div>
 			</div>
 		</aside>
 
 		<main id="main" class="content"></main>
 		<footer id="footer">
-			<p>footer</p>
+			<!-- <p>footer</p> -->
 			<p>
 				Template made by
 				<a href="https://github.com/mihaly-ale">
