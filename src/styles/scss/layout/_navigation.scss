@@ -196,17 +196,22 @@
 	/* Remove `popover` default styling*/
 	border: none;
 	padding: 0;
-	/* - */
-	list-style: none;
-
-	box-shadow: var(--shadow-small);
-
-	position: absolute;
 	inset: unset;
+	/* Position as inset is cleared */
 	bottom: 0;
 	right: 0;
+
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-end;
+	align-items: center;
+	gap: var(--size-6);
+
 	width: 250px;
 	height: 100vh;
+
+	box-shadow: var(--shadow-small);
+	list-style: none;
 
 	opacity: 0;
 	transition:
@@ -214,8 +219,9 @@
 		display 1s;
 	transition-behavior: allow-discrete;
 
-	/* Reset popover styles to act like a regular element in normal document flow */
+	/* Reset popover styles to act like a regular element in normal document flow on large screens*/
 	@include mq(small) {
+		align-items: flex-start;
 		gap: var(--size-4);
 		opacity: 1;
 		background-color: var(--body-text-clr);
@@ -227,12 +233,7 @@
 	}
 
 	&:popover-open {
-		display: flex;
-		flex-direction: column;
-		justify-content: flex-end;
-		gap: var(--size-6);
-
-		opacity: 0.95;
+		opacity: 1;
 
 		@starting-style {
 			display: flex;
@@ -240,29 +241,24 @@
 		}
 	}
 
-	.nav-list-item {
-		width: 100%;
-	}
-
+	/* Swapping colors to blend into parents*/
 	.nav-link {
 		--_bg-clr: white;
 		--_text-clr: var(--clr-dark);
 		padding: var(--size-4);
-		border-radius: 0;
+
 		@include mq(small) {
-			width: fit-content;
+			--_bg-clr: var(--clr-dark);
+			--_text-clr: var(--clr-light);
 		}
 
 		&:focus-visible {
 			outline-color: var(--clr-dark);
 			outline-offset: 0;
+
 			@include mq(small) {
-				--_bg-clr: var(--clr-dark);
-				--_text-clr: var(--clr-light);
+				outline-color: var(--clr-light);
 			}
-				@include mq(small) {
-					outline-color: var(--clr-light);
-				}
 		}
 	}
 }
