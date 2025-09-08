@@ -6,7 +6,11 @@ aside {
 	color: var(--clr-light);
 	padding-block-end: var(--size-6);
 
-	@include flex-center;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	align-items: center;
+	gap: 1em;
 
 	.logo {
 		margin-block-start: var(--size-6);

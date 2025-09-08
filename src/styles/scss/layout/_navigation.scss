@@ -3,7 +3,9 @@
 /* Navigation start*/
 .nav-wrapper {
 	display: flex;
+	justify-content: space-evenly;
 	gap: var(--size-4);
+	flex-grow: 1;
 
 	@include mq(small) {
 		flex-direction: column;
