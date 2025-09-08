@@ -11,9 +11,13 @@ aside {
 	justify-content: space-between;
 	align-items: center;
 	gap: 1em;
+}
 
-	.logo {
-		margin-block-start: var(--size-6);
+.logo {
+	margin-block-start: var(--size-6);
+
+	@include mq(medium) {
+		margin-block-start: var(--size-10);
 	}
 }
 /* Sidebar end*/

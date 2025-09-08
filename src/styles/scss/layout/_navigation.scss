@@ -101,7 +101,7 @@
 		block-size: 1.5lh;
 		border-radius: var(--size-3);
 
-		@include mq(small) {
+		@include mq(medium) {
 			block-size: 1.15lh;
 		}
 	}

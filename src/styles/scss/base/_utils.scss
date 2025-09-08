@@ -19,4 +19,20 @@
 	@extend %flex-center;
 }
 
+.show-desktop {
+	display: none;
+
+	@include mq(medium) {
+		display: inline-block;
+	}
+}
+
+.show-mobile {
+	display: inline-block;
+
+	@include mq(medium) {
+		display: none;
+	}
+}
+
 /* Utils end */
