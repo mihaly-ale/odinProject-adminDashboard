@@ -155,6 +155,10 @@
 	outline: none;
 	padding: 0;
 
+	@include mq(small) {
+		display: none;
+	}
+
 	.icon {
 		block-size: 1.5lh;
 	}
@@ -210,6 +214,18 @@
 		display 1s;
 	transition-behavior: allow-discrete;
 
+	/* Reset popover styles to act like a regular element in normal document flow */
+	@include mq(small) {
+		gap: var(--size-4);
+		opacity: 1;
+		background-color: var(--body-text-clr);
+		overflow: visible;
+
+		position: static;
+		height: auto;
+		width: auto;
+	}
+
 	&:popover-open {
 		display: flex;
 		flex-direction: column;
@@ -233,10 +249,20 @@
 		--_text-clr: var(--clr-dark);
 		padding: var(--size-4);
 		border-radius: 0;
+		@include mq(small) {
+			width: fit-content;
+		}
 
 		&:focus-visible {
 			outline-color: var(--clr-dark);
 			outline-offset: 0;
+			@include mq(small) {
+				--_bg-clr: var(--clr-dark);
+				--_text-clr: var(--clr-light);
+			}
+				@include mq(small) {
+					outline-color: var(--clr-light);
+				}
 		}
 	}
 }
