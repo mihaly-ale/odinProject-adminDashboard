@@ -120,15 +120,12 @@
 }
 
 .nav-link-text {
-	@include mq(small) {
-		padding: var(--size-3) var(--size-3) var(--size-1);
-	}
-}
+	/* Hide on small screen. Svg <title> will add the accessible name*/
+	display: none;
 
-/* Hide on small screen. Svg <title> will add the accessible name*/
-@media (width <= 480px) {
-	.nav-link-text {
-		display: none;
+	@include mq(medium) {
+		padding: var(--size-3) var(--size-3) var(--size-1);
+		display: unset;
 	}
 }
 
@@ -267,6 +264,13 @@
 
 ::backdrop {
 	backdrop-filter: blur(2px);
+}
+
+@media screen and (30em <= width < 45em) {
+	[popover],
+	.primary-navigation .nav-list {
+		flex-direction: row;
+	}
 }
 
 /* Navigation end*/
