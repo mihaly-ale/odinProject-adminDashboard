@@ -2,18 +2,8 @@
 
 /* Fontface start */
 
-@include font-face(
-	'Noto-Sans',
-	'notosans-variable',
-	100 900,
-	normal,
-	(true, sans)
-);
-@include font-face(
-	'Noto-Sans',
-	'notosans-italic-variable',
-	400,
-	normal,
-	(false, sans)
-);
+@include font-face('Nunito', 'Nunito-Medium', 500, normal, (true, sans));
+@include font-face('Nunito', 'Nunito-Light', 300, normal, (false, sans));
+@include font-face('Nunito', 'Nunito-Bold', 700, normal, (false, sans));
+@include font-face('Nunito', 'Nunito-LightItalic', 300, italic, (false, sans));
 /* Fontface end */
