@@ -4,10 +4,34 @@
 footer {
 	background-color: var(--clr-dark);
 	color: var(--clr-light);
+	text-align: center;
+	padding: var(--size-4);
 
-	// temporary styling
-	--appbar-height: 49.25px;
+	--appbar-height: 58.85px;
 	margin-bottom: var(--appbar-height);
-}
 
+	@include mq(small) {
+		margin-bottom: 0;
+	}
+
+	p {
+		margin: 0;
+
+		@include flex-center($gap: 0.5em);
+	}
+
+	a {
+		--_bg-clr: var(--clr-dark);
+		--_text-clr: var(--clr-light);
+
+		&:focus-visible {
+			outline-color: var(--clr-light);
+			--link-outline-offset: var(--size-3);
+		}
+
+		&:hover .dev-logo {
+			filter: opacity(50%);
+		}
+	}
+}
 /* Footer end*/
